@@ -6,9 +6,13 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+<<<<<<< HEAD
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "json-server": "^0.16.3",
+=======
+    "bootstrap": "^4.6.0",
+>>>>>>> c8e3a9080ff088a2ffa03cf50d21a7878b2946b0
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
@@ -16,7 +20,10 @@
     "react-rater": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+<<<<<<< HEAD
     "save": "^2.4.0",
+=======
+>>>>>>> c8e3a9080ff088a2ffa03cf50d21a7878b2946b0
     "video.js": "^7.11.8",
     "videojs-react-enhanced": "^0.3.1",
     "web-vitals": "^1.1.1"
