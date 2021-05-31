@@ -29,9 +29,11 @@ function App() {
 
   const [Movies, setMovies] = useState([]);
   const getMovies = () => {
-    axios.get(`http://localhost:3005/posts`).then((res) => {
-      setMovies(res.data);
-    });
+    axios
+      .get("https://movies-app-f1485-default-rtdb.firebaseio.com/posts.json")
+      .then((res) => {
+        setMovies(res.data);
+      });
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import "react-bootstrap";
 import "../App.css";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Rater from "react-rater";
@@ -10,39 +10,136 @@ import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import Modal from "react-bootstrap/Modal";
+import Modif from "./modif";
 
 function Admin({ Movies }) {
-  const supprimer = (id, e) => {
-    axios.delete(`http://localhost:3005/posts/${id}`).then((res2) => {
-      console.log(res2);
-    });
-  };
-
   const [ajout, setAjout] = useState({
     title: "",
-    poster: "",
     rate: "",
     poster: "",
     overview: "",
-
     release: "",
     genre: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:3005/posts`, ajout).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post(
+        "https://movies-app-f1485-default-rtdb.firebaseio.com/posts.json",
+        ajout
+      )
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
+  //   const supprimer = (id) => {
+  //     axios.delete(`http://localhost:3005/posts${id}`).then((res2) => {
+  //       console.log(res2);
+  //     });
+  //   };
+
+  const supprimer = (id) => {
+    axios
+      .delete(
+        `https://movies-app-f1485-default-rtdb.firebaseio.com/posts/${id}.json`
+      )
+      .then((res2) => {
+        console.log(res2.data);
+      });
   };
 
   const [show, setShow] = useState(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
     <div>
+      <Button variant="primary" onClick={handleShow} className="modalle">
+        Ajout
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Ajouter Film </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Nom de Film </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="nouveau  film"
+                onChange={(e) => setAjout({ ...ajout, title: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>image de film </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Overview de film"
+                onChange={(e) => setAjout({ ...ajout, poster: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Overview de film </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Overview de film"
+                onChange={(e) =>
+                  setAjout({ ...ajout, overview: e.target.value })
+                }
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Release_date </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder=" Release date  de film"
+                onChange={(e) =>
+                  setAjout({ ...ajout, release: e.target.value })
+                }
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Rate de film </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder=" Rate de film"
+                onChange={(e) => setAjout({ ...ajout, rate: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Genre de film </Form.Label>{" "}
+              <Form.Control
+                type="text"
+                placeholder=" Genre de film"
+                onChange={(e) => setAjout({ ...ajout, genre: e.target.value })}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Ajouter
+            </Button>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -53,16 +150,23 @@ function Admin({ Movies }) {
           </tr>
         </thead>
         <tbody>
-          {Movies.map((el) => (
-            <tr>
+          {Object.keys(Movies).map((id) => (
+            <tr key={id}>
               <td>
-                <Image src={el.poster} style={{ height: "200px" }} />
+                <Image src={Movies[id].poster} style={{ height: "200px" }} />
+                <br />
+                <Rater total={5} rating={Movies[id].rate} />
               </td>
-              <td>{el.title}</td>
+              <td>{Movies[id].title}</td>
               <td>
                 {" "}
-                <button variant="primary">Modifier</button>
-                <Modal
+                <button>
+                  <div>
+                    <Modif id={id} Movies={Movies} />
+                  </div>
+                  Modifier
+                </button>
+                {/* <Modal
                   show={show}
                   onHide={handleClose}
                   backdrop="static"
@@ -72,12 +176,18 @@ function Admin({ Movies }) {
                     <Modal.Title>Modifier ce Film</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <input type="text" value={el.Rate} />
-                    <input type="text" value={el.title} />
-                    <input type="text" value={el.poster} />
-                    <input type="text" value={el.overview} />
-                    <input type="text" value={el.release_date} />
-                    <input type="text" value={el.genre} />
+                    <Rater total={5} rating={el.rate} />
+                    <br />
+                    <input type="text" defaultValue={el.title} />
+                    <br />
+                    <Image src={el.poster} style={{ height: "200px" }} />
+                    <br />
+                    <input type="text" defaultValue={el.overview} />
+                    <br />
+                    <input type="text" defaultValue={el.release_date} />
+                    <br />
+                    <input type="text" defaultValue={el.genre} />
+                    <br />
                   </Modal.Body>
 
                   <Modal.Footer>
@@ -86,10 +196,10 @@ function Admin({ Movies }) {
                     </Button>
                     <Button variant="primary">souvgarder</Button>
                   </Modal.Footer>
-                </Modal>
+                </Modal> */}
               </td>
               <td>
-                <button onClick={(e) => supprimer(el.id, e)}>supprimer</button>
+                <button onClick={() => supprimer(id)}>supprimer</button>
               </td>
             </tr>
           ))}
@@ -97,66 +207,6 @@ function Admin({ Movies }) {
       </Table>
 
       <br />
-
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label>Nom de Film </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="nouveau  film"
-            onChange={(e) => setAjout({ ...ajout, title: e.target.value })}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>image de film </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Overview de film"
-            onChange={(e) => setAjout({ ...ajout, poster: e.target.value })}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Overview de film </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Overview de film"
-            onChange={(e) => setAjout({ ...ajout, overview: e.target.value })}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Release_date </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder=" Release date  de film"
-            onChange={(e) => setAjout({ ...ajout, release: e.target.value })}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Rate de film </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder=" Rate de film"
-            onChange={(e) => setAjout({ ...ajout, rate: e.target.value })}
-          />
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Genre de film </Form.Label>
-          <Form.Control
-            type="text"
-            placeholder=" Genre de film"
-            onChange={(e) => setAjout({ ...ajout, genre: e.target.value })}
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Ajouter
-        </Button>
-      </Form>
     </div>
   );
 }

@@ -8,21 +8,34 @@ import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import Card from "react-bootstrap/Card";
 
-function Cards({ input, getAdd, getfavorie }) {
-  const [Movies, setMovies] = useState([]);
-  const getMovies = () => {
-    fetch("Movies.json")
-      .then((recp) => recp.json())
-      .then((Movies) => setMovies(Movies));
-  };
-  useEffect(() => {
-    getMovies();
-  }, []);
+function Cards({ input, getAdd, getfavorie, Movies }) {
+  // const [Movies, setMovies] = useState([]);
+  // const getMovies = () => {
+  //   fetch("Movies.json")
+  //     .then((recp) => recp.json())
+  //     .then((Movies) => setMovies(Movies));
+  // };
+  // useEffect(() => {
+  //   getMovies();
+  // }, []);
+
+  // var today = new Date();
+  // const date =
+  //   today.getFullYear() + "-" + (today.getMonth() + 1) + " " + today.getDate();
 
   return input === "" ? (
     <div>
-      <Rater total={5} />
-
+      {/* <div className="row d-flex justify-content-between p-4 ">
+        <div className="col-md-3"></div>
+        <div className="col-md-3 ">
+          <h1>{date}</h1>
+        </div>
+        <div className="col-md-3">
+          <button type="button" class="btn btn-outline-secondary">
+            Nos Films
+          </button>
+        </div>
+      </div> */}
       <Container>
         <Row className="justify-content-around p-4 ">
           {Movies.map((el) => (

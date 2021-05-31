@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 function Navbare({ handelchange, Addfavorie }) {
   return (
     <div>
-      <Navbar bg="ligh" variant="light">
+      <Navbar bg="light" variant="light">
         <Navbar.Brand href="#home">
-          <img src={Logo} style={{ width: "80px", height: "50px" }} />
+          <img src={Logo} style={{ width: "50px", height: "50px" }} />
         </Navbar.Brand>
         <Nav className="mx-auto ">
           <Link to="/">Acceuil</Link>
@@ -30,7 +30,7 @@ function Navbare({ handelchange, Addfavorie }) {
           />
           <ion-icon name="search-circle-outline"></ion-icon>
           <div className="btnt">
-            <img src="https://img.icons8.com/ios/40/000000/user-male-circle.png" />
+            <img src="https://img.icons8.com/ios/35/000000/user-male-circle.png" />
           </div>
         </Form>
       </Navbar>
