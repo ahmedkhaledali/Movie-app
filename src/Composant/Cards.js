@@ -8,7 +8,7 @@ import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import Card from "react-bootstrap/Card";
 
-function Cards({ input, getAdd, getfavorie, Movies }) {
+function Cards({ input, getAdd, getfavorie, movies }) {
   // const [Movies, setMovies] = useState([]);
   // const getMovies = () => {
   //   fetch("Movies.json")
@@ -38,7 +38,7 @@ function Cards({ input, getAdd, getfavorie, Movies }) {
       </div> */}
       <Container>
         <Row className="justify-content-around p-4 ">
-          {Movies.map((el) => (
+          {movies.map((el) => (
             <Col md={3} className="justify-self-center">
               <Card className="cards">
                 <Image src={el.poster} style={{ height: "200px" }} />
@@ -64,27 +64,27 @@ function Cards({ input, getAdd, getfavorie, Movies }) {
   ) : (
     <div>
       <Row className="justify-content-around p-4 ">
-        {Movies.filter((el) =>
-          el.title.toLowerCase().includes(input.toLowerCase())
-        ).map((el) => (
-          <Col md={3} className="justify-self-center">
-            <Card className="cards">
-              <Image src={el.poster} style={{ height: "200px" }} />
-              <p style={{ textAlign: "center" }}>{el.title}</p>
-              <button
-                className="btcl"
-                onClick={() => {
-                  getAdd();
-                  getfavorie(el);
-                }}
-              >
-                <img src="https://img.icons8.com/pastel-glyph/35/000000/like--v2.png" />
-              </button>
-              <br />
-              <Rater total={5} rating={el.rate} />
-            </Card>
-          </Col>
-        ))}
+        {movies
+          .filter((el) => el.title.toLowerCase().includes(input.toLowerCase()))
+          .map((el) => (
+            <Col md={3} className="justify-self-center">
+              <Card className="cards">
+                <Image src={el.poster} style={{ height: "200px" }} />
+                <p style={{ textAlign: "center" }}>{el.title}</p>
+                <button
+                  className="btcl"
+                  onClick={() => {
+                    getAdd();
+                    getfavorie(el);
+                  }}
+                >
+                  <img src="https://img.icons8.com/pastel-glyph/35/000000/like--v2.png" />
+                </button>
+                <br />
+                <Rater total={5} rating={el.rate} />
+              </Card>
+            </Col>
+          ))}
       </Row>
     </div>
   );

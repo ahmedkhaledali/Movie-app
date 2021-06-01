@@ -12,7 +12,7 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import Modif from "./modif";
 
-function Admin({ Movies }) {
+function Admin({ movies }) {
   const [ajout, setAjout] = useState({
     title: "",
     rate: "",
@@ -25,10 +25,7 @@ function Admin({ Movies }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "https://movies-app-f1485-default-rtdb.firebaseio.com/posts.json",
-        ajout
-      )
+      .post("https://app2-861f5-default-rtdb.firebaseio.com/posts.json", ajout)
       .then((res) => {
         console.log(res);
       });
@@ -42,13 +39,14 @@ function Admin({ Movies }) {
 
   const supprimer = (id) => {
     axios
-      .delete(
-        `https://movies-app-f1485-default-rtdb.firebaseio.com/posts/${id}.json`
-      )
+      .delete(`https://app2-861f5-default-rtdb.firebaseio.com/posts/${id}.json`)
       .then((res2) => {
         console.log(res2.data);
       });
   };
+  useEffect(() => {
+    supprimer();
+  }, []);
 
   const [show, setShow] = useState(false);
 
@@ -150,19 +148,19 @@ function Admin({ Movies }) {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(Movies).map((id) => (
-            <tr key={id}>
+          {Object.keys(movies).map((id) => (
+            <tr>
               <td>
-                <Image src={Movies[id].poster} style={{ height: "200px" }} />
+                <Image src={movies[id].poster} style={{ height: "200px" }} />
                 <br />
-                <Rater total={5} rating={Movies[id].rate} />
+                <Rater total={5} rating={movies[id].rate} />
               </td>
-              <td>{Movies[id].title}</td>
+              <td>{movies[id].title}</td>
               <td>
                 {" "}
                 <button>
                   <div>
-                    <Modif id={id} Movies={Movies} />
+                    <Modif id={id} movies={movies} />
                   </div>
                   Modifier
                 </button>

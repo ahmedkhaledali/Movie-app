@@ -10,7 +10,7 @@ function Acceuil({
   Addfavorie,
   handelchange,
   input,
-  Movies,
+  movies,
 }) {
   // const [input, setInput] = useState("");
   // const handelchange = (event) => {
@@ -31,7 +31,7 @@ function Acceuil({
           input={input}
           getAdd={getAdd}
           getfavorie={getfavorie}
-          Movies={Movies}
+          movies={movies}
         />
       </div>
     </div>

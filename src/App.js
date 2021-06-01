@@ -27,12 +27,13 @@ function App() {
   };
   console.log(input);
 
-  const [Movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const getMovies = () => {
     axios
-      .get("https://movies-app-f1485-default-rtdb.firebaseio.com/posts.json")
+      .get("https://app2-861f5-default-rtdb.firebaseio.com/posts.json")
       .then((res) => {
         setMovies(res.data);
+        console.log(movies);
       });
   };
 
@@ -56,7 +57,7 @@ function App() {
             getfavorie={getfavorie}
             handelchange={handelchange}
             input={input}
-            Movies={Movies}
+            movies={movies}
           />
         </Route>
         <Route exact path="/contact">
@@ -71,7 +72,7 @@ function App() {
           />
         </Route>
         <Route exact path="/admin">
-          <Admin Movies={Movies} />
+          <Admin movies={movies} />
         </Route>
         <Footer />
       </BrowserRouter>

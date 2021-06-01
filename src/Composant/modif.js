@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Rater from "react-rater";
 import Image from "react-bootstrap/Image";
-const Modif = ({ Movies, id }) => {
+const Modif = ({ movies, id }) => {
   const [input, setInput] = useState({
-    title: Movies[id].title,
-    rate: Movies[id].rate,
-    poster: Movies[id].poster,
-    overview: Movies[id].overview,
-    release: Movies[id].release_date,
-    genre: Movies[id].genre,
+    title: movies[id].title,
+    rate: movies[id].rate,
+    poster: movies[id].poster,
+    overview: movies[id].overview,
+    release: movies[id].release_date,
+    genre: movies[id].genre,
   });
 
   const handelCahnge = (e) => {
@@ -50,7 +50,7 @@ const Modif = ({ Movies, id }) => {
                 <Form.Label>title movie</Form.Label>
                 <br></br>
                 <Form.Control
-                  defaultValue={Movies[id].title}
+                  defaultValue={movies[id].title}
                   type="text"
                   name="title"
                   onChange={handelCahnge}
@@ -63,7 +63,7 @@ const Modif = ({ Movies, id }) => {
                 <Form.Label>genre</Form.Label>
                 <br></br>
                 <Form.Control
-                  defaultValue={Movies[id].genre}
+                  defaultValue={movies[id].genre}
                   type="text"
                   name="genre"
                   onChange={handelCahnge}
@@ -75,7 +75,7 @@ const Modif = ({ Movies, id }) => {
                 <Form.Label>Release</Form.Label>
                 <br></br>
                 <Form.Control
-                  defaultValue={Movies[id].release_date}
+                  defaultValue={movies[id].release_date}
                   type="text"
                   name="release"
                   onChange={handelCahnge}
@@ -87,32 +87,32 @@ const Modif = ({ Movies, id }) => {
                 <Form.Label>Rate</Form.Label>
                 <br></br>
                 <Form.Control
-                  defaultValue={Movies[id].rate}
+                  defaultValue={movies[id].rate}
                   type="text"
                   name="rate"
                   onChange={handelCahnge}
                   // onChange={handleChange}
                   placeholder="Runtime"
                 />
-                <Rater total={5} rating={Movies[id].rate} />
+                <Rater total={5} rating={movies[id].rate} />
               </Form.Group>
               <Form.Group>
                 <Form.Label>image movie</Form.Label>
                 <br></br>
                 <Form.Control
-                  defaultValue={Movies[id].poster}
+                  defaultValue={movies[id].poster}
                   type="text"
                   name="poster"
                   onChange={handelCahnge}
                   placeholder="Enter url"
                 />
-                <Image src={Movies[id].poster} style={{ height: "200px" }} />
+                <Image src={movies[id].poster} style={{ height: "200px" }} />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Overview movie</Form.Label>
                 <br></br>
                 <Form.Control
-                  defaultValue={Movies[id].overview}
+                  defaultValue={movies[id].overview}
                   type="text"
                   name="overview"
                   onChange={handelCahnge}
