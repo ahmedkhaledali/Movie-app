@@ -3,13 +3,14 @@ import Navbare from "./Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Row, Container } from "react-bootstrap";
-import Video from "./video";
 
 function Contact({ Addfavorie }) {
   return (
     <div>
       <Navbare Addfavorie={Addfavorie} />
+
       <Container>
+        <p className="date">Plus information a notre siteweb</p>
         <Row className="d-flex justify-content-center p-5">
           <Form>
             <Form.Group controlId="formBasicEmail">
@@ -33,8 +34,6 @@ function Contact({ Addfavorie }) {
           </Form>
         </Row>
       </Container>
-
-      <Video />
     </div>
   );
 }

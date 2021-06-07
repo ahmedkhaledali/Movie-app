@@ -72,7 +72,7 @@ function App() {
           />
         </Route>
         <Route exact path="/admin">
-          <Admin movies={movies} />
+          <Admin movies={movies} input={input} />
         </Route>
         <Footer />
       </BrowserRouter>

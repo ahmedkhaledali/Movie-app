@@ -11,8 +11,12 @@ import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import Modif from "./modif";
+import Tab from "react-bootstrap/Tab";
+import Nav from "react-bootstrap/Nav";
+import Ali from "../Composant/images/ali.png";
+import FormControl from "react-bootstrap/FormControl";
 
-function Admin({ movies }) {
+function Admin({ movies, input }) {
   const [ajout, setAjout] = useState({
     title: "",
     rate: "",
@@ -26,9 +30,7 @@ function Admin({ movies }) {
     e.preventDefault();
     axios
       .post("https://app2-861f5-default-rtdb.firebaseio.com/posts.json", ajout)
-      .then((res) => {
-        console.log(res);
-      });
+      .then((res) => console.log(res));
   };
 
   //   const supprimer = (id) => {
@@ -40,13 +42,13 @@ function Admin({ movies }) {
   const supprimer = (id) => {
     axios
       .delete(`https://app2-861f5-default-rtdb.firebaseio.com/posts/${id}.json`)
-      .then((res2) => {
-        console.log(res2.data);
-      });
+      .then((res2) => console.log(res2.data))
+      .then((res2) => refreshPage());
   };
-  useEffect(() => {
-    supprimer();
-  }, []);
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   const [show, setShow] = useState(false);
 
@@ -55,9 +57,96 @@ function Admin({ movies }) {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow} className="modalle">
-        Ajout
-      </Button>
+      {/* <FormControl
+        type="text"
+        placeholder="Search"
+        className="search"
+        // onChange={handelchange}
+      /> */}
+      <Tab.Container
+        id="left-tabs-example"
+        defaultActiveKey="first"
+        className="navtabs"
+      >
+        <Row>
+          <Col sm={3} className="cole">
+            <img
+              className="admin"
+              src="https://img.icons8.com/ios-filled/70/000000/admin-settings-male.png"
+            />
+
+            <Nav variant="pills" className="flex-column p-2">
+              <Nav.Item>
+                <Nav.Link eventKey="first">Liste films</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="second">Ajouter une film</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="third">liste de clients </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col sm={9}>
+            {" "}
+            <Tab.Content>
+              <Tab.Pane eventKey="first">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>liste de film</th>
+                      <th>Nom de film </th>
+                      <th>Modifier film</th>
+                      <th>Supprimer film</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.keys(movies).map((id) => (
+                      <tr>
+                        <td>
+                          <Image
+                            src={movies[id].poster}
+                            style={{ height: "200px" }}
+                          />
+                          <br />
+                          <Rater total={5} rating={movies[id].rate} />
+                        </td>
+                        <td>{movies[id].title}</td>
+                        <td>
+                          <Modif id={id} movies={movies} />
+
+                          {/* <button
+                            type="button"
+                            class="btn btn-outline-warning w-25 m-l-100"
+                          >
+                            <Modif id={id} movies={movies} />
+                            Modifier
+                          </button> */}
+                        </td>
+                        <td>
+                          <button onClick={() => supprimer(id)}>
+                            supprimer
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Tab.Pane>
+              <Tab.Pane eventKey="second">
+                <Button
+                  variant="primary"
+                  onClick={handleShow}
+                  className="modalle"
+                >
+                  Ajout
+                </Button>
+              </Tab.Pane>
+              <Tab.Pane eventKey="third"></Tab.Pane>
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -132,77 +221,8 @@ function Admin({ movies }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
         </Modal.Footer>
       </Modal>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>liste de film</th>
-            <th>Nom de film </th>
-            <th>Modifier film</th>
-            <th>Supprimer film</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(movies).map((id) => (
-            <tr>
-              <td>
-                <Image src={movies[id].poster} style={{ height: "200px" }} />
-                <br />
-                <Rater total={5} rating={movies[id].rate} />
-              </td>
-              <td>{movies[id].title}</td>
-              <td>
-                {" "}
-                <button>
-                  <div>
-                    <Modif id={id} movies={movies} />
-                  </div>
-                  Modifier
-                </button>
-                {/* <Modal
-                  show={show}
-                  onHide={handleClose}
-                  backdrop="static"
-                  keyboard={false}
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>Modifier ce Film</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Rater total={5} rating={el.rate} />
-                    <br />
-                    <input type="text" defaultValue={el.title} />
-                    <br />
-                    <Image src={el.poster} style={{ height: "200px" }} />
-                    <br />
-                    <input type="text" defaultValue={el.overview} />
-                    <br />
-                    <input type="text" defaultValue={el.release_date} />
-                    <br />
-                    <input type="text" defaultValue={el.genre} />
-                    <br />
-                  </Modal.Body>
-
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Fermer
-                    </Button>
-                    <Button variant="primary">souvgarder</Button>
-                  </Modal.Footer>
-                </Modal> */}
-              </td>
-              <td>
-                <button onClick={() => supprimer(id)}>supprimer</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
 
       <br />
     </div>

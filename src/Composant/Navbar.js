@@ -6,13 +6,12 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Logo from "./images/logo.png";
 import "../App.css";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 function Navbare({ handelchange, Addfavorie }) {
   return (
     <div>
-      <Navbar bg="light" variant="light">
+      <Navbar bg="transparant" variant="light" fixed="top">
         <Navbar.Brand href="#home">
           <img src={Logo} style={{ width: "50px", height: "50px" }} />
         </Navbar.Brand>
@@ -28,7 +27,7 @@ function Navbare({ handelchange, Addfavorie }) {
             className="search"
             onChange={handelchange}
           />
-          <ion-icon name="search-circle-outline"></ion-icon>
+          {/* <ion-icon name="search-circle-outline"></ion-icon> */}
           <div className="btnt">
             <img src="https://img.icons8.com/ios/35/000000/user-male-circle.png" />
           </div>

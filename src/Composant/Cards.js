@@ -19,41 +19,26 @@ function Cards({ input, getAdd, getfavorie, movies }) {
   //   getMovies();
   // }, []);
 
-  // var today = new Date();
-  // const date =
-  //   today.getFullYear() + "-" + (today.getMonth() + 1) + " " + today.getDate();
-
   return input === "" ? (
     <div>
-      {/* <div className="row d-flex justify-content-between p-4 ">
-        <div className="col-md-3"></div>
-        <div className="col-md-3 ">
-          <h1>{date}</h1>
-        </div>
-        <div className="col-md-3">
-          <button type="button" class="btn btn-outline-secondary">
-            Nos Films
-          </button>
-        </div>
-      </div> */}
-      <Container>
+      <Container className="fond">
         <Row className="justify-content-around p-4 ">
-          {movies.map((el) => (
+          {Object.keys(movies).map((id) => (
             <Col md={3} className="justify-self-center">
               <Card className="cards">
-                <Image src={el.poster} style={{ height: "200px" }} />
-                <p style={{ textAlign: "center" }}>{el.title}</p>
+                <Image src={movies[id].poster} style={{ height: "200px" }} />
+                <p className="ttcard">{movies[id].title}</p>
                 <button
                   className="btcl"
                   onClick={() => {
                     getAdd();
-                    getfavorie(el);
+                    getfavorie(movies[id]);
                   }}
                 >
                   <img src="https://img.icons8.com/pastel-glyph/35/000000/like--v2.png" />
                 </button>
                 <br />
-                <Rater total={5} rating={el.rate} />
+                <Rater total={5} rating={movies[id].rate} />
               </Card>
             </Col>
           ))}
@@ -64,24 +49,26 @@ function Cards({ input, getAdd, getfavorie, movies }) {
   ) : (
     <div>
       <Row className="justify-content-around p-4 ">
-        {movies
-          .filter((el) => el.title.toLowerCase().includes(input.toLowerCase()))
-          .map((el) => (
+        {Object.keys(movies)
+          .filter((id) =>
+            movies[id].title.toLowerCase().includes(input.toLowerCase())
+          )
+          .map((id) => (
             <Col md={3} className="justify-self-center">
               <Card className="cards">
-                <Image src={el.poster} style={{ height: "200px" }} />
-                <p style={{ textAlign: "center" }}>{el.title}</p>
+                <Image src={movies[id].poster} style={{ height: "200px" }} />
+                <p style={{ textAlign: "center" }}>{movies[id].title}</p>
                 <button
                   className="btcl"
                   onClick={() => {
                     getAdd();
-                    getfavorie(el);
+                    getfavorie(id);
                   }}
                 >
                   <img src="https://img.icons8.com/pastel-glyph/35/000000/like--v2.png" />
                 </button>
                 <br />
-                <Rater total={5} rating={el.rate} />
+                <Rater total={5} rating={movies[id].rate} />
               </Card>
             </Col>
           ))}

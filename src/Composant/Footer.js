@@ -15,15 +15,15 @@ const footer = [
 
 function Footer1(props) {
   return (
-    <div>
-      <Container className="themed-container" fluid={true}>
+    <div className="ff">
+      <Container className="themed-container " fluid={true}>
         <Row className="justify-content-center p-4">
           <Image src={Logo} style={{ width: "80px", height: "50px" }} />
         </Row>
         <Row className="justify-content-around p-1">
           <Col md={4}>
             <h3>A Propos</h3>
-            <p>
+            <p className="prp">
               Offrir aux cinéphiles une source pratique et rapide d'informations
               sur le cinéma, tout en facilitant l'accès aux salles, c'est la
               mission d'AlloCiné. AlloCiné peut être joint 24h/24 en quelques
@@ -38,7 +38,14 @@ function Footer1(props) {
             <h3>Lien rapide</h3>
             {props.ftt.map((el) => (
               <ul>
-                <a href="" style={{ textDecoration: "none", color: "black" }}>
+                <a
+                  href=""
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    fontFamily: "Lobster",
+                  }}
+                >
                   {" "}
                   {el.lienrapide}{" "}
                 </a>
@@ -48,7 +55,8 @@ function Footer1(props) {
           <Col md={4}>
             <ion-icon name="logo-facebook"></ion-icon>
             <ion-icon name="logo-instagram"></ion-icon>
-            <ion-icon name="logo-twitter"></ion-icon>
+            <ion-icon name="logo-twitter"></ion-icon> <br />
+            <div class="elfsight-app-d3bc7f9f-5a91-4dfd-901d-c7df4e54bfb6"></div>
           </Col>
         </Row>
       </Container>

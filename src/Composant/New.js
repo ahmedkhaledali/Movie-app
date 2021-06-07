@@ -31,10 +31,8 @@ function New() {
             <p className="descrp">The montagne between us</p>
             <button type="button" class="btn btn-outline-warning w-25 m-l-100">
               Bande annonce{" "}
-              <img src="https://img.icons8.com/flat-round/40/fa314a/play--v1.png" />
             </button>
-            <img src="https://img.icons8.com/android/30/fa314a/clock.png" />
-            01:51:50
+
             <br />
             <Rater total={5} rating={4} />
           </Carousel.Caption>
@@ -45,10 +43,8 @@ function New() {
             <p className="descrp">Wrath of Man</p>
             <button type="button" class="btn btn-outline-warning w-25 m-l-100">
               Bande annonce{" "}
-              <img src="https://img.icons8.com/flat-round/40/fa314a/play--v1.png" />
             </button>
-            <img src="https://img.icons8.com/android/30/fa314a/clock.png" />
-            01:58:57
+
             <br />
             <Rater total={5} rating={5} />
           </Carousel.Caption>
@@ -59,10 +55,8 @@ function New() {
             <p className="descrp">Joker</p>
             <button type="button" class="btn btn-outline-warning w-25 m-l-100">
               Bande annonce{" "}
-              <img src="https://img.icons8.com/flat-round/40/fa314a/play--v1.png" />
             </button>
-            <img src="https://img.icons8.com/android/30/fa314a/clock.png" />
-            02:01:50
+
             <br />
             <Rater total={5} rating={4} />
           </Carousel.Caption>

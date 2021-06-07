@@ -1,4 +1,7 @@
-*,
+body {
+  background-color: #f5f6fa;
+  overflow-x: hidden;
+}
 *::before,
 *::after {
   box-sizing: border-box;
@@ -11,6 +14,7 @@
   display: block;
   width: 100%;
   height: 500px;
+  opacity: 0.9;
 }
 /* .bg-nav {
   background-image: url(./Composant/images/cov.jpg);
@@ -82,9 +86,13 @@ button.btt:hover {
 } */
 
 .themed-container {
-  background-color: rgba(47, 54, 64, 0.4);
+  background-color: white;
+  position: relative;
+  z-index: -1;
 }
-
+.ff {
+  margin-top: 5%;
+}
 .prag {
   font-size: 25px;
 }
@@ -100,7 +108,7 @@ a {
   text-decoration: none;
   background-color: transparent;
   padding: 8%;
-  font-family: "Lora", serif;
+  font-family: "Lobster", cursive;
   font-size: 20px;
 }
 .btcl {
@@ -114,8 +122,51 @@ a {
 .cards {
   width: 250px;
   padding: 0;
+  border: none;
+  padding-bottom: 5%;
 }
 .modalle {
   margin-top: 5%;
   margin-left: 50%;
+}
+.date {
+  text-align: center;
+  margin-top: 50px;
+  font-family: "Lobster", cursive;
+  font-size: 40px;
+}
+.fond {
+  box-shadow: 0 -7.2px 5.1px rgba(0, 0, 0, 0.38),
+    0 13.7px 19px rgba(0, 0, 0, 0.295), 0 160px 80px rgba(0, 0, 0, 0.231);
+}
+ion-icon {
+  color: #e74c3c;
+}
+.prp {
+  font-family: "Lobster", cursive;
+  font-weight: normal;
+}
+.ttcard {
+  text-align: center;
+  font-family: "Lobster", cursive;
+}
+.admin {
+  border-radius: 100%;
+  margin-left: 35%;
+  margin-top: 10%;
+}
+.cole {
+  background-color: brown;
+}
+.landing {
+  background-color: var(--clr-bg-dark);
+  padding: 8%;
+  padding-top: 7% !important;
+  padding-left: 11% !important;
+  color: var(--clr-primary-light);
+  background-image: url(./Composant/images/cov.jpg);
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
 }

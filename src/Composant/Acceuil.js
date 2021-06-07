@@ -24,8 +24,9 @@ function Acceuil({
         handelchange={handelchange}
         input={input}
       />
-      <Boddy />
+
       <New />
+      <Boddy />
       <div>
         <Cards
           input={input}

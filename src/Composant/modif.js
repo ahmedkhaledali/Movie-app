@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Rater from "react-rater";
 import Image from "react-bootstrap/Image";
-const Modif = ({ movies, id }) => {
+
+const Modif = ({ movies, id, refreshPage }) => {
   const [input, setInput] = useState({
     title: movies[id].title,
     rate: movies[id].rate,
@@ -20,16 +21,17 @@ const Modif = ({ movies, id }) => {
   // function update
   const updateMovie = (id) => {
     axios
-      .put(`http://localhost:3005/posts/${id}`, input)
+      .put(
+        `https://app2-861f5-default-rtdb.firebaseio.com/posts/${id}.json`,
+        input
+      )
       .then((response) => {
         setInput(response.data);
       })
+      .then((response) => refreshPage())
       .catch((err) => console.log(err));
     console.log("updateuuuuuuuuuuueeeeeee", input);
   };
-  useEffect(() => {
-    updateMovie();
-  }, []);
 
   const [show1, setShow1] = useState(false);
   const handleClose1 = () => setShow1(false);

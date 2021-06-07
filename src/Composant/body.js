@@ -3,16 +3,15 @@ import "react-bootstrap";
 import "../App.css";
 
 function Boddy() {
+  var today = new Date();
+  const date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
   return (
     <div>
-      {/* <div className="bg-nav">
-        <p className="titre">
-          Tourner un film
-          <br /> doit être une joie
-        </p>
-        <p className="stitre">N'hésitez pas de regarder</p>
-        <button className="btt">l'heure du show </button>
-      </div> */}
+      <marquee>
+        <p className="date"> Nos films d'aujourd'huit - {date} </p>
+      </marquee>
     </div>
   );
 }
